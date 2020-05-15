@@ -39,6 +39,10 @@ cors_proxy.createServer({
     // Do not add X-Forwarded-For, etc. headers, because Heroku already adds it.
     xfwd: false,
   },
+  httpsOptions: {
+    key: fs.readFileSync('/etc/cors/ssl/privkey.pem'),
+    cert: fs.readFileSync('/etc/cors/ssl/cert.pem')
+  }
 }).listen(port, host, function() {
   console.log('Running CORS Anywhere on ' + host + ':' + port);
 });
